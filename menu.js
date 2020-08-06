@@ -1,6 +1,6 @@
 const menu = [
     {
-    label: "File",
+    label: "Options",
     submenu:[
             {
                 label:"exit",
