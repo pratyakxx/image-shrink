@@ -11,10 +11,16 @@ let mainWindow
 const createMainWindow = () => {
     mainWindow = new BrowserWindow({
         title:"imageShrink",
-        width:500,
-        height:500,
+        width:isDev ? 800 : 450,
+        height:580,
+        backgroundColor:"white",
         resizable: isDev,
+        webPreferences:{
+            nodeIntegration:true,
+        },
     })
+
+    isDev ? mainWindow.webContents.openDevTools(): null
     mainWindow.loadFile('./app/index.html')
 
 }
@@ -23,6 +29,6 @@ app.on('ready',()=>{
     createMainWindow()
     const mainMenu = Menu.buildFromTemplate(menu)
     Menu.setApplicationMenu(mainMenu)
-    mainWindow.on('closed',()=>mainWindow=null)
+    app.on('closed',()=>mainWindow=null)
 })
 

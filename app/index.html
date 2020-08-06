@@ -46,6 +46,26 @@
 			</div>
 		</div>
 
-		<script src="js/materialize.min.js"></script>
+        <script src="js/materialize.min.js"></script>
+        <script>
+            const path = require("path")
+            const os = require("os")
+            const outputPath = path.join(os.homedir(),"imageShrink")
+            const form  = document.getElementById('image-form')
+            const slider = document.getElementById('slider')
+            const img = document.getElementById('img')
+
+            form.addEventListener('submit', e => {
+                e.preventDefault()
+
+                const imgPath = img.files[0].path
+                const quality = slider.value
+
+                console.log(imgPath)
+                console.log(quality)
+            } )
+
+            document.getElementById('output-path').innerText = outputPath
+        </script>
 	</body>
 </html>
