@@ -49,7 +49,9 @@
         <script src="js/materialize.min.js"></script>
         <script>
             const path = require("path")
-            const os = require("os")
+			const os = require("os")
+			const { ipcRenderer} = require("electron")
+
             const outputPath = path.join(os.homedir(),"imageShrink")
             const form  = document.getElementById('image-form')
             const slider = document.getElementById('slider')
@@ -61,8 +63,10 @@
                 const imgPath = img.files[0].path
                 const quality = slider.value
 
-                console.log(imgPath)
-                console.log(quality)
+                ipcRenderer.send("imgMin", {
+					imgPath,
+					quality,
+				})
             } )
 
             document.getElementById('output-path').innerText = outputPath

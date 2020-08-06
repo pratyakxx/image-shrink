@@ -1,4 +1,4 @@
-const {app, BrowserWindow , Menu } = require("electron")
+const {app, BrowserWindow , Menu , ipcMain} = require("electron")
 const menu = require('./menu')
 
 process.env.NODE_ENV = "development"
@@ -25,10 +25,15 @@ const createMainWindow = () => {
 
 }
 
+
 app.on('ready',()=>{
     createMainWindow()
     const mainMenu = Menu.buildFromTemplate(menu)
     Menu.setApplicationMenu(mainMenu)
     app.on('closed',()=>mainWindow=null)
+})
+
+ipcMain.on("imgMin", (e,options)=>{
+    console.log(options)
 })
 
